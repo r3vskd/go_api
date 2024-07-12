@@ -1,0 +1,13 @@
+- Constant, Variables and data types
+- funciones
+- arrays
+- slices
+- maps
+- looping control structures
+- Strings, runes and bytes
+- Structs and interfaces
+- Pointers
+- Goroutines
+- Channels
+- Generics
+- Api
