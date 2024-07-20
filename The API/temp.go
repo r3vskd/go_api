@@ -6,7 +6,7 @@ import (
 	"sync"
 )
 
-// Struct and Interfa
+// Struct and Interf
 type Processor interface {
 	Process(input []string) map[string]int
 }
