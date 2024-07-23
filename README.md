@@ -22,6 +22,17 @@ Go have:
 
 ![alt text](https://github.com/r3vskd/go_api/blob/main/images/Screenshot_4.png)
 
+# Key concepts about Golang:
+
+- Arrays and Slices: Used for input data and unique string processing.
+- Maps: Used to count character occurrences.
+- Loops: Used for iterating over input data and results.
+- Channels and Goroutines: Used for concurrent processing.
+- Functions and Pointers: Used in the processString function.
+- Strings and Runes: Processed to count letter and digit occurrences.
+- Generics: Used to create a reusable filterUnique function.
+- Structs and Interfaces: Used to define and implement the Processor interface.
+
 # Running the AP
 ``` go run main.go ```
 
