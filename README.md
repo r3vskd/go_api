@@ -5,7 +5,7 @@ Testing API's written in go step by step, from basic functions to API constructi
 https://github.com/gorilla/mux
 
 # Why i use go for this API?
-Go is:
+Go have:
 - Fast compile time
 - Built in concurrency
 - Simplicity
