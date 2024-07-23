@@ -1,78 +1,91 @@
-#package main
+package main
 
-#import (
-#	"fmt"
-#	"strings"
-#	"sync"
-#)
+import (
+	"fmt"
+	"net/http"
+	"strings"
+	"sync"
+)
 
-#type Processor interface {
-#	Process(input []string) map[string]int
-#}
+type TextProcessor interface {
+	Process(text []string) map[rune]int
+}
 
-#type StringProcessor struct{}
+type SimpleTextProcessor struct{}
 
-#func (sp *StringProcessor) Process(input []string) map[string]int {
-#	results := make(map[string]int)
-#	ch := make(chan string)
-#	var wg sync.WaitGroup
+func (stp *SimpleTextProcessor) Process(text []string) map[rune]int {
+	runeCounts := make(map[rune]int)
+	ch := make(chan map[rune]int)
+	var wg sync.WaitGroup
 
-#	for _, str := range input {
-#		wg.Add(1)
-#		go func(s string) {
-#			defer wg.Done()
-#			processString(s, ch)
-#		}(str)
-#	}
+	for _, t := range text {
+		wg.Add(1)
+		go func(t string) {
+			defer wg.Done()
+			ch <- countRunes(t)
+		}(t)
+	}
 
-#	go func() {
-#		wg.Wait()
-#	}()
+	go func() {
+		wg.Wait()
+		close(ch)
+	}()
 
-#	for result := range ch {
-#		results[result]++
-#	}
+	for counts := range ch {
+		for r, c := range counts {
+			runeCounts[r] += c
+		}
+	}
 
-#	return results
-#}
+	return runeCounts
+}
 
-#func processString(s string, ch chan<- string) {
-#	for _, r := range s {
-#		if isLetterOrDigit(r) {
-#			ch <- string(r)
-#		}
-#	}
-#}
+func countRunes(s string) map[rune]int {
+	counts := make(map[rune]int)
+	for _, r := range s {
+		counts[r]++
+	}
+	return counts
+}
 
-#func filterUnique[T comparable](items []T) []T {
-#	seen := make(map[T]bool)
-#	var unique []T
-#	for _, item := range items {
-#		if !seen[item] {
-#			unique = append(unique, item)
-#			seen[item] = true
-#		}
-#	}
-#	return unique
-#}
+func unique[T comparable](items []T) []T {
+	seen := make(map[T]bool)
+	var result []T
+	for _, item := range items {
+		if !seen[item] {
+			seen[item] = true
+			result = append(result, item)
+		}
+	}
+	return result
+}
 
-#func isLetterOrDigit(r rune) bool {
-#	return (r >= 'a' && r <= 'z') || (r >= 'A' && r <= 'Z') || (r >= '0' && r <= '9')
-#}
+func countRunesHandler(w http.ResponseWriter, r *http.Request) {
+	text := r.URL.Query()["text"]
+	processor := &SimpleTextProcessor{}
+	runeCounts := processor.Process(text)
 
-#func main() {
-#	data := []string{"Hello123", "World456", "GoLang789", "Concurrent123", "Programming456"}
+	fmt.Fprintf(w, "Character counts:\n")
+	for r, c := range runeCounts {
+		fmt.Fprintf(w, "%q: %d\n", r, c)
+	}
+}
 
-#	var processor Processor = &StringProcessor{}
-#	results := processor.Process(data)
+func uniqueHandler(w http.ResponseWriter, r *http.Request) {
+	text := r.URL.Query()["text"]
+	uniqueStrings := unique(text)
 
-#	fmt.Println("Character Occurrences:")
-#	for char, count := range results {
-#		fmt.Printf("%s: %d\n", char, count)
-#	}
+	fmt.Fprintf(w, "Unique strings:\n")
+	for _, s := range uniqueStrings {
+		fmt.Fprintf(w, "%s\n", s)
+	}
+}
 
-#	uniqueStrings := filterUnique(data)
-#	fmt.Println("\nUnique Strings:")
-#		fmt.Println(str)
-#	}
-#}
+func main() {
+	http.HandleFunc("/count", countRunesHandler)
+	http.HandleFunc("/unique", uniqueHandler)
+
+	fmt.Println("Server started at http://localhost:8080")
+	http.ListenAndServe(":8080", nil)
+}
+
