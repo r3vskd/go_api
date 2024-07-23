@@ -27,11 +27,17 @@ Go have:
 - Arrays and Slices: Used for input data and unique string processing.
 - Maps: Used to count character occurrences.
 - Loops: Used for iterating over input data and results.
-- Channels and Goroutines: Used for concurrent processing.
+- Channels and Goroutines: Goroutines and channels in Go are the primary tools for managing concurrency.
 - Functions and Pointers: Used in the processString function.
 - Strings and Runes: Processed to count letter and digit occurrences.
 - Generics: Used to create a reusable filterUnique function.
 - Structs and Interfaces: Used to define and implement the Processor interface.
+- Concurrency: Concurrency is about dealing with lots of things at once.
+
+# Common packages i Golang:
+- fmt: For formatted I/O operations.
+- sync: Provides synchronization primitives, such as WaitGroup.
+- time: For time-related functions, used here to simulate work with time.Sleep.
 
 # Running the AP
 ``` go run main.go ```
