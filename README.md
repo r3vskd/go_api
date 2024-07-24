@@ -22,7 +22,7 @@ Go have:
 
 ![alt text](https://github.com/r3vskd/go_api/blob/main/images/Screenshot_4.png)
 
-# Key concepts about Golang:
+## Key concepts about Golang:
 
 - Arrays and Slices: Used for input data and unique string processing.
 - Maps: Used to count character occurrences.
@@ -34,13 +34,13 @@ Go have:
 - Structs and Interfaces: Used to define and implement the Processor interface.
 - Concurrency: Concurrency is about dealing with lots of things at once.
 
-# Common packages i Golang:
+## Common packages i Golang:
 
 - fmt: For formatted I/O operations.
 - sync: Provides synchronization primitives, such as WaitGroup.
 - time: For time-related functions, used here to simulate work with time.Sleep.
 
-# What is defer for?
+## What is defer for?
 
 Defer statement defers the execution of a function until the surrounding function returns.
 The deferred call's arguments are evaluated immediately, but the function call is not executed until the surrounding function returns.
