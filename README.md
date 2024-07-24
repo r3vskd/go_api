@@ -45,9 +45,12 @@ Go have:
 Defer statement defers the execution of a function until the surrounding function returns.
 The deferred call's arguments are evaluated immediately, but the function call is not executed until the surrounding function returns.
 
-## slices
+## Slices
 
 ![alt text](https://github.com/r3vskd/go_api/blob/main/images/Untitled-Diagram38.jpg)
+
+## Maps
+![alt text](https://github.com/r3vskd/go_api/blob/main/images/0qFxv.jpg)
 
 # Running the API
 ``` go run main.go ```
