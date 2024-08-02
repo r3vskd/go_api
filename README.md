@@ -1,5 +1,5 @@
 # Go API
-Testing API's written in go step by step, from basic functions to API construction.
+Testing API's written in go step by step, from basic functions to API construction
 
 # Resources
 https://github.com/gorilla/mux
