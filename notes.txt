@@ -1,6 +1,6 @@
 - Readme ---> Intro to golang
 - Constant, Variables and data types
-- funciones
+- Functions
 - arrays
 - slices
 - maps
