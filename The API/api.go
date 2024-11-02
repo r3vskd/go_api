@@ -26,7 +26,7 @@ func (stp *SimpleTextProcessor) Process(text []string) map[rune]int {
 		}(t)
 	}
 
-	go func() {
+	go func(){
 		wg.Wait()
 		close(ch)
 	}()
