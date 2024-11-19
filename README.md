@@ -1,4 +1,4 @@
-## Go API
+# Go API
 Testing API's written in go step by step, from basic functions to API construction
 
 # Resources
